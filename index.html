@@ -83,7 +83,7 @@
         ];
 
         // Call the function with the array of texts and the desired interval
-        blinkDots(texts, 200);
+        blinkDots(texts, (printing() * 1000));
         document.querySelector(".terminal").innerHTML += "Thank you for the information<br>";
         document.querySelector(".terminal").innerHTML += "You may leave now<br>";
 
