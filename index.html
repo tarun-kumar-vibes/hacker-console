@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker's Terminal</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: monospace;
+            font-size: 16px;
+            line-height: 1.6;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .terminal {
+            border: 2px solid lime;
+            padding: 20px;
+            width: 90vw;
+            height: 90vh;
+            overflow: auto;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="terminal">
+
+    </div>
+
+    <script>
+
+        const printing = () => {
+            let random = Math.floor(Math.random() * 7) + 1;
+            return random;
+        }
+
+        const blinkDots = (texts, interval) => {
+            let textIndex = 0;
+            let dotCount = 0;
+            var previousText = "";
+            const intervalId = setInterval(() => {
+                const text = texts[textIndex];
+                if (dotCount === 0) {
+                    document.querySelector(".terminal").innerHTML = previousText + "<br>" + text + ".";
+                    dotCount++;
+                } else if (dotCount === 1) {
+                    document.querySelector(".terminal").innerHTML = previousText + "<br>" + text + "..";
+                    dotCount++;
+                } else if (dotCount === 2) {
+                    document.querySelector(".terminal").innerHTML = previousText + "<br>" + text + "...";
+                    dotCount++;
+                } else {
+                    document.querySelector(".terminal").innerHTML = previousText + "<br>" + text;
+                    dotCount = 0;
+                    textIndex++;
+                    if (textIndex === texts.length) {
+                        clearInterval(intervalId);
+                    }
+                    previousText += "<br>" + text;
+                }
+            }, interval);
+            return intervalId;
+        }
+
+        // Define the texts to be printed
+        let texts = [
+            "Initializing Hacking",
+            "Reading Your Files",
+            "Password files Detected",
+            "Sending all passwords and personal files to server",
+            "Cleaning up"
+        ];
+
+        // Call the function with the array of texts and the desired interval
+        blinkDots(texts, 200);
+        document.querySelector(".terminal").innerHTML += "Thank you for the information<br>";
+        document.querySelector(".terminal").innerHTML += "You may leave now<br>";
+
+    </script>
+
+</body>
+
+</html>
