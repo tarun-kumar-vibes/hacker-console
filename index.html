@@ -4,91 +4,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacker's Terminal</title>
+    <title>Exercie 5</title>
     <style>
-        body {
+        @import url('https://fonts.cdnfonts.com/css/hacked');
+
+        #container {
+            width: 98vw;
+            min-height: 98vh;
+            max-height: auto;
+            margin: auto;
+            border: 2px solid red;
             background-color: black;
             color: lime;
-            font-family: monospace;
-            font-size: 16px;
-            line-height: 1.6;
-            padding: 20px;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            width: 100vw;
-            height: 100vh;
+            font-size: 20px;
+            font-family: 'HACKED', sans-serif;
         }
 
-        .terminal {
-            border: 2px solid lime;
-            padding: 20px;
-            width: 90vw;
-            height: 90vh;
-            overflow: auto;
-            position: absolute;
+        #container p {
+            margin-left: 20px;
+            margin-top: 5px;
+            letter-spacing: 2px;
+        }
+
+        #container h4 {
+            margin-bottom: 10px;
+            margin-left: 20px;
+            margin-top: 5px;
+            letter-spacing: 2px;
         }
     </style>
 </head>
 
 <body>
-    <div class="terminal">
-
+    <div id="container">
+        <h4>Realme C12 [Version 10.0.22624.1755] </h4>
+        <h4>(c) Realme Corporation. All rights reserved.</h4>
     </div>
 
     <script>
-
-        const printing = () => {
-            let random = Math.floor(Math.random() * 7) + 1;
-            return random;
-        }
-
-        const blinkDots = (texts, interval) => {
-            let textIndex = 0;
-            let dotCount = 0;
-            var previousText = "";
-            const intervalId = setInterval(() => {
-                const text = texts[textIndex];
-                if (dotCount === 0) {
-                    document.querySelector(".terminal").innerHTML = previousText + "<br>" + text + ".";
-                    dotCount++;
-                } else if (dotCount === 1) {
-                    document.querySelector(".terminal").innerHTML = previousText + "<br>" + text + "..";
-                    dotCount++;
-                } else if (dotCount === 2) {
-                    document.querySelector(".terminal").innerHTML = previousText + "<br>" + text + "...";
-                    dotCount++;
-                } else {
-                    document.querySelector(".terminal").innerHTML = previousText + "<br>" + text;
-                    dotCount = 0;
-                    textIndex++;
-                    if (textIndex === texts.length) {
-                        clearInterval(intervalId);
-                    }
-                    previousText += "<br>" + text;
-                }
-            }, interval);
-            return intervalId;
-        }
-
-        // Define the texts to be printed
-        let texts = [
-            "Initializing Hacking",
-            "Reading Your Files",
-            "Password files Detected",
-            "Sending all passwords and personal files to server",
-            "Cleaning up"
+        var text = [
+            "Initializing hack program",
+            "Hacking Nikita's username",
+            "username found _its_nikki78",
+            "connecting to intagram",
+            "extracting login credintials",
+            "password extracted",
+            "2 post 187 followers and 179 following found",
+            "bio: #16 * 2 = 8, #Thar lover, Midicose, Belong to army family, Pgims rohtak, Sanatani",
+            "suggested accounts found: tannu._dabas._, vidhi_rohilla_14, upasana_sohal, its.kirn19, i_am_ashish_dagar, _its_me__kaushik",
+            "Account privacy: Private",
+            "Account data collected in Json file",
+            "Exporting json file to system",
+            "Account hack successful",
+            "Closing Hack Program and removing tracs",
+            "Closing connection with server"
         ];
 
-        // Call the function with the array of texts and the desired interval
-        blinkDots(texts, (printing() * 1000));
-        document.querySelector(".terminal").innerHTML += "Thank you for the information<br>";
-        document.querySelector(".terminal").innerHTML += "You may leave now<br>";
+        const randomdelay = () => {
+            return new Promise((resolve, reject) => {
+                timeout = Math.floor(Math.random() * 10) + 10;
+                setTimeout(() => {
+                    resolve();
+                }, timeout * 1000);
+            })
+        }
 
+        async function blinkDots() {
+            let x = setInterval(() => {
+                let last = document.getElementById('container').lastElementChild;
+                if (last.innerHTML.endsWith("...")) {
+                    last.innerHTML = last.innerHTML.slice(0, -3);
+                }
+                else {
+                    last.innerHTML = last.innerHTML + ".";
+                }
+            }, 350);
+        }
+
+
+        async function load_data() {
+            const container = document.getElementById('container');
+
+            for (let i = 0; i < text.length; i++) {
+                await randomdelay();
+                const pTag = document.createElement('p');
+                container.appendChild(pTag);
+
+                if (i === 0) {
+                    pTag.style.marginTop = '10px';
+                }
+
+                // Print text
+                pTag.textContent = `C:\\Users\\nikita> ${text[i]}`;
+
+                // Add blinking dots after each line (except the last line)
+                if (i < text.length - 1) {
+                    await blinkDots(pTag);
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', load_data);
     </script>
-
 </body>
 
 </html>
